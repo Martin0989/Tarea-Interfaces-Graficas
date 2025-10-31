@@ -65,7 +65,8 @@ public class PersonaDAO {
     /**
      * Lee todos los contactos del archivo
      */
-    public List<Persona> leerArchivo() throws IOException {
+    //public List<Persona> leerArchivo() throws IOException {
+    public List<Persona> leerContactos() throws IOException {
         List<Persona> personas = new ArrayList<>();
         
         // Verificar si el archivo existe

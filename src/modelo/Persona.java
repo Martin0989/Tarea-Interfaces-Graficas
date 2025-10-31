@@ -26,7 +26,7 @@ public class Persona {
         this.favorito = favorito;
     }
 
-    // Getters y Setters
+    // Getters y Setters 
     public String getNombre() {
         return nombre;
     }
@@ -84,7 +84,9 @@ public class Persona {
     /**
      * Array de objetos para la tabla
      */
+    //@Override
     public Object[] toTableRow() {
-        return new Object[]{nombre, telefono, email, categoria, favorito ? "Sí" : "No"};
+        // Devuelve el boolean 'favorito'
+        return new Object[]{nombre, telefono, email, categoria, favorito};
     }
 }
