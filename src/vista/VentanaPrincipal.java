@@ -191,12 +191,12 @@ public class VentanaPrincipal extends JFrame {
         panelNorte.add(panelBusqueda, BorderLayout.SOUTH); // Búsqueda antes de la tabla
 
         // ********************************
-        // 4. Configurar Tabla (Centro) - CORRECCIÓN CLAVE
+        // 4. Configurar Tabla (Centro) 
         // ********************************
         
         modeloTabla = new DefaultTableModel(new Object[]{"Nombre", "Teléfono", "Email", "Categoría", "Favorito"}, 0) {
             
-            // 🔴 SOLUCIÓN 1: Evita ClassCastException, la columna 4 es Boolean.class
+            
             @Override
             public Class<?> getColumnClass(int columnIndex) {
                 // La columna Favorito (índice 4) es de tipo Boolean.
@@ -207,7 +207,7 @@ public class VentanaPrincipal extends JFrame {
                 return String.class;
             }
 
-            // 🟢 SOLUCIÓN 2: Controla qué celdas son editables. Solo el checkbox debería serlo.
+            // 🟢 SOLUCIÓN 2: Controla qué celdas son editables 
             @Override
             public boolean isCellEditable(int row, int column) {
                 // Solo la columna 4 (Favorito) debe ser editable para el checkbox

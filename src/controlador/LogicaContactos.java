@@ -19,7 +19,6 @@ import java.util.Locale;
 import java.util.stream.Collectors;
 
 /**
- * Controlador que maneja la lógica de la aplicación
  * Implementa múltiples listeners para diferentes eventos
  */
 public class LogicaContactos implements ActionListener, ListSelectionListener, 
@@ -234,7 +233,7 @@ public class LogicaContactos implements ActionListener, ListSelectionListener,
                 int total = dataContactos.size();
                 
                 long favoritos = dataContactos.stream().filter(Persona::isFavorito).count();
-                // Asumo que las categorías están guardadas en español (Familia, Amigos, Trabajo)
+                
                 long familia = dataContactos.stream()
                     .filter(p -> p.getCategoria().equalsIgnoreCase("Familia")).count();
                 long amigos = dataContactos.stream()
@@ -249,10 +248,10 @@ public class LogicaContactos implements ActionListener, ListSelectionListener,
             protected void done() {
                 try {
                     int[] results = get();
-                    // Actualización de la GUI en el EDT
+                    
                     delegado.lbl_totalContactos.setText(i18n.getTexto("lbl.total") + " " + results[0]);
                     delegado.lbl_favoritos.setText(i18n.getTexto("lbl.favoritos") + " " + results[1]);
-                    // Se usan las claves de i18n para los textos, los resultados son los números.
+
                     delegado.lbl_familia.setText("   • " + i18n.getTexto("cat.familia") + ": " + results[2]); 
                     delegado.lbl_amigos.setText("   • " + i18n.getTexto("cat.amigos") + ": " + results[3]); 
                     delegado.lbl_trabajo.setText("   • " + i18n.getTexto("cat.trabajo") + ": " + results[4]); 
@@ -289,7 +288,7 @@ public class LogicaContactos implements ActionListener, ListSelectionListener,
              return;
          }
 
-        // 🟢 CORRECCIÓN FINAL: Verificar si el placeholder (índice 0) está seleccionado
+        
         if (delegado.cmb_categoria.getSelectedIndex() == 0) { 
              JOptionPane.showMessageDialog(delegado, 
                  i18n.getTexto("error.seleccionar_categoria"), i18n.getTexto("error.advertencia"), 
@@ -319,7 +318,7 @@ public class LogicaContactos implements ActionListener, ListSelectionListener,
              return;
          }
 
-        // Mapear índice de tabla (vista) a índice de lista (modelo)
+        
         int realIndex = delegado.tabla_contactos.convertRowIndexToModel(filaSeleccionada) + 1;
         
         Persona p = contactos.get(realIndex);
@@ -352,7 +351,7 @@ public class LogicaContactos implements ActionListener, ListSelectionListener,
              i18n.getTexto("confirm.eliminar_titulo"), 
              JOptionPane.YES_NO_OPTION);
         if (confirm == JOptionPane.YES_OPTION) {
-            // Mapear índice de tabla (vista) a índice de lista (modelo)
+            
             int realIndex = delegado.tabla_contactos.convertRowIndexToModel(filaSeleccionada) + 1;
             contactos.remove(realIndex);
 
@@ -375,7 +374,7 @@ public class LogicaContactos implements ActionListener, ListSelectionListener,
         int userSelection = fileChooser.showSaveDialog(delegado);
         if (userSelection == JFileChooser.APPROVE_OPTION) {
             try {
-                // Excluir el encabezado (índice 0)
+                
                 List<Persona> contactosExportar = contactos.size() > 0 ? 
                     contactos.subList(1, contactos.size()) : new ArrayList<>();
                 
@@ -399,13 +398,13 @@ public class LogicaContactos implements ActionListener, ListSelectionListener,
         if (texto.trim().isEmpty()) {
             sorter.setRowFilter(null);
         } else {
-            // Filtrado que ignora mayúsculas/minúsculas (?i)
+            
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + texto));
         }
     }
 
     private void cargarContactoEnFormulario(int fila) {
-        // Mapear índice de tabla (vista) a índice de lista (modelo)
+        
         int realIndex = delegado.tabla_contactos.convertRowIndexToModel(fila) + 1;
         if (realIndex < contactos.size()) {
             Persona p = contactos.get(realIndex);

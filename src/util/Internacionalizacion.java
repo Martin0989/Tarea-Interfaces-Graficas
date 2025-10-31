@@ -9,7 +9,7 @@ import java.util.ResourceBundle;
 public class Internacionalizacion {
     private ResourceBundle bundle;
     
-    // La ruta base a los archivos de propiedades (debe coincidir con la carpeta 'recursos')
+    
     private static final String BUNDLE_BASE_NAME = "recursos.Mensajes"; 
 
     public Internacionalizacion(Locale locale) {
